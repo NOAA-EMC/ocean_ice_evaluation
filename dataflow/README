@@ -1,2 +1,5 @@
 Directory for tested dataflow tools
 
+subdirectories are:
+wcoss -- for running on wcoss2 and using data unique to that platform
+rdhpcs -- for running on ursa, gaea, linux boxes -- data publicly available
