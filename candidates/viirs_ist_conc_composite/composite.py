@@ -9,9 +9,10 @@ Robert.Grumbine
 
 import sys
 import datetime
+from math import cos, sqrt
 
 import numpy as np
-import numpy.ma as ma
+from numpy import ma
 import netCDF4 as nc
 
 from grid import *
