@@ -20,6 +20,7 @@ jobs:
         pip install pylint
         pip install numpy
         pip install netCDF4
+        pip install math matplotlib matplotlib.pyplot
     - name: Analysing the code with pylint
       run: |
         pylint --disable=W0311,C0325 $(git ls-files '*.py')
