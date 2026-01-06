@@ -45,7 +45,7 @@ elif (col == 5):
   have = True
 print("have = ",have)
 
-if (have):
+if have:
   vector = np.zeros((int((maxhrs)/24)+2 ))
   i = 1
   for line in fin_nsidc:

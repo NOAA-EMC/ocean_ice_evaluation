@@ -82,7 +82,7 @@ for memno in range(0,maxmem+1):
 
   for h in range(24,maxhour+1,24):
     fname = fbase + f"{h:03d}" + '.nc'
-    if (not os.path.exists(fname)):
+    if not os.path.exists(fname):
         print("no such file ",fname)
         #sys.exit(1)
         continue

@@ -1,0 +1,17 @@
+#!/bin/sh
+set -x
+# Mirror the NSIDC archive of IMS analyses.
+# Files are .nc
+# Robert Grumbine 1/6/2026
+
+export OUTBASE=your_path_here
+
+#--- No changes needed below here
+
+cd $OUTBASE
+
+base=ftp://sidads.colorado.edu/pub/DATASETS/
+
+wget -nv --mirror $base/NOAA/G02156/netcdf/4km/
+# Or use lines like this for specific years. Archive starts in 2004
+#wget -nv --mirror $base/NOAA/G02156/netcdf/4km/2024/
