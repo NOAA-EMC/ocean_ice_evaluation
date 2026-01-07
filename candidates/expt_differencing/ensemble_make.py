@@ -1,6 +1,6 @@
 '''
 make ensemble mean and sigma stats from ice model for sfs ensemble
-Arguments are experiment name and date (as an 8 digit string)
+Arguments are experiment name, date (as an 8 digit string), and run length (hours)
 
 Robert Grumbine 1/6/2026
 '''
@@ -19,7 +19,11 @@ nx = 360
 ny = 320
 # 0.25 degree grid
 
-pinteresting = ['aice_h', 'hi_h', 'uvel_h', 'vvel_h']
+pinteresting = ['aice_h', 'hi_h', 'uvel_h', 'vvel_h', 'hs_h', 'Tsfc_h', 'albsni_h']
+# available:
+#    aice_h, hi_h, uvel_h, vvel_h
+#    hs_h, Tsfc_h, albsni_h,
+#    tmask, tarea, TLON, TLAT (nj, ni) -- should be identical for all members at all leads
 
 #---------- Should need no changes below here
 nparam = len(pinteresting)
@@ -79,8 +83,8 @@ for hh in range(24, runlen+1, 24):
       sums[p].tofile(fout)
 
     outname = dirname + '/sfs.t00z.sigma'+pinteresting[p]+'.f'+hhh+'.bin'
-    with open(outname,"wb") as fout:
-      sigma[p].tofile(fout)
+    #with open(outname,"wb") as fout:
+    sigma[p].tofile(outname)
 
   del sums, sumsq, sigma
   print("")
