@@ -119,6 +119,7 @@ def nearest(oloc, mlats, mlons, toler = 50.):
       return -1
       
 
+yyy = -1
 for flead in range(1, fcst_len+1):
     hhh = f"{int(flead*24):03d}"
     fname = fbase+hhh+".nc"
@@ -138,8 +139,10 @@ for flead in range(1, fcst_len+1):
     fdist *= 1000. # convert to meters
     #debug: print(nbuoy, ilat.max(), ilat.min(), flat.max(), flat.min(), fdir.max(), fdist.max(), flush=True )
 
-    yyy = nearest(locations[obs_index], ilat, ilon)
-    #debug: print("nearest index = ",yyy, flush=True)
+    if (flead == 1):
+      yyy = nearest(locations[obs_index], ilat, ilon)
+      #debug: print("nearest index = ",yyy, flush=True)
+
     y = locations[obs_index+flead]
     z = locations[obs_index].make_fcst(y)
     (d, wdir, dt, speed) = locations[obs_index].make_fcst(y)
