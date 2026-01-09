@@ -8,5 +8,3 @@ assumes members 000-010
 sfs.20231101/00/mem000/products/ice/netcdf/native
 all hours f024 to f8784
 
-needs auxiliary file with tarea for the cells
-

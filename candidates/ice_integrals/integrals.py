@@ -25,17 +25,17 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 # Edit these ----------------------------------------------------------
-#gaea: base   = '/ncrc/home1/Robert.Grumbine/scratch6/COMROOT/'
-#ursa:
-base   = '/home/Robert.Grumbine/scratch/COMROOT/'
-start  = datetime.datetime(2023,11,1)
-expt   = 'cice.20231101'
-maxmem = 10
+#gaea: 
+base   = '/ncrc/home1/Robert.Grumbine/scratch6/COMROOT/'
+#ursa: base   = '/home/Robert.Grumbine/scratch/COMROOT/'
+start  = datetime.datetime(2023,5,1)
+expt   = 'cice.replay.'+start.strftime("%Y%m%d")
 maxhour = 8784 # 366 d
 #maxhour = 744  # 31 d
 #maxhour = 2400  # 100 d
 crit_conc = 0.15 #concentration defining 'extent'
 
+members   = 11
 # Should not need editing below here ----------------------------------
 def find_extent(cellarea, conc, crit):
   '''
@@ -72,7 +72,7 @@ shext  = np.zeros((int((maxhour-24)/24)+2 ))
 volume = np.zeros((int((maxhour-24)/24)+2 ))
 days   = np.zeros(len(area))
 
-for memno in range(0,maxmem+1):
+for memno in range(0,members):
 #for memno in range(0,2):
 #debug: memno  = 0
 

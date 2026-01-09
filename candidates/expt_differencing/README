@@ -1,0 +1,4 @@
+python3 ensemble_make.py cice.cpc.20111101/ 20111101 8784 > out.cpc.20111101
+python3 ensemble_make.py cice.replay.20111101/ 20111101 8784 > out.replay.20111101
+
+python3 differencing.py cice.cpc.20111101 cice.replay.20111101 20111101 8784 > allout

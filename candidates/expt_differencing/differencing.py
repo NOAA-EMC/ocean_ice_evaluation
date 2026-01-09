@@ -27,6 +27,7 @@ ny = 320
 # 0.25 degree grid
 
 pinteresting = ['aice_h', 'hi_h', 'uvel_h', 'vvel_h', 'hs_h', 'Tsfc_h', 'albsni_h']
+#pinteresting = ['aice_h', 'hi_h', 'uvel_h', 'vvel_h' ]
 # available:
 #    aice_h, hi_h, uvel_h, vvel_h
 #    hs_h, Tsfc_h, albsni_h,
