@@ -1,0 +1,19 @@
+#!/bin/sh
+set -x
+
+# Mirror selected years of OSISAF analysis, including AMSR2 from when that came online
+# Robert Grumbine 1/6/2026
+
+export OUTBASE=your_path_here
+
+#--- No changes needed below here
+
+cd $OUTBASE
+
+for y in 2020 2021 2022 2023 2024 2025 2026
+do 
+  wget -nv --mirror ftp://osisaf.met.no/archive/ice/conc/$y/
+  if [ $y -ge 2016 ] ; then
+    wget -nv --mirror ftp://osisaf.met.no/archive/ice/conc_amsr/$y/
+  fi
+done
