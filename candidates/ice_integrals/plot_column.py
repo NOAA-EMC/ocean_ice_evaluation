@@ -33,7 +33,7 @@ for f in sys.argv[2:]:
     days[int(float(words[1]))] = int(float(words[1]))
 
   vector /= 10
-  ax.plot(days[1:end], vector[1:end], label = "expt"+f"{k:d}" )
+  ax.plot(days[1:end], vector[1:end], label = f )
   k += 1
 
 have = False
@@ -54,7 +54,7 @@ if have:
     i += 1
     if (i > end):
         break
-  ax.plot(days[1:end], vector[1:end], label = "nsidc", color = "black")
+  ax.plot(days[1:end], vector[1:end], label = "nsidc.2023", color = "black")
 
 ax.legend()
 ax.grid()
