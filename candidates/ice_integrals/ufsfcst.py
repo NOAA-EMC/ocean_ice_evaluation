@@ -1,7 +1,13 @@
+'''
+'''
+
 import sys
 import datetime
 
 import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
 
 #------------------------------------------------------------------------
 def nsidc_readin(fname):
@@ -28,10 +34,10 @@ def nsidc_readin(fname):
   del ext, missing, tag
   return fnumtag, fnumext
 
-def gfs_readin(fname, nh, sh):
-  with open(fname, "r", encoding="utf-8") as fgfs:
+def ufs_readin(fname, nh, sh):
+  with open(fname, "r", encoding="utf-8") as fufs:
     k = 0
-    for line in fgfs:
+    for line in fufs:
       words = line.split()
       nh[k] = float(words[5])
       sh[k] = float(words[6])
@@ -42,7 +48,10 @@ def gfs_readin(fname, nh, sh):
 numtag, numext = nsidc_readin("N_seaice_extent_daily_v4.0.csv")
 sumtag, sumext = nsidc_readin("S_seaice_extent_daily_v4.0.csv")
 
-lead = 16
+#lead = 16 # GFS
+#dh = 6
+lead = 366 # SFS
+dh = 24 #SFS
 days = np.zeros((lead+1))
 # Get the lead days observations
 ttag = datetime.datetime(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
@@ -59,27 +68,24 @@ for i in range(0, lead+1):
 daynum = int(k[0])
 
 #------------------------------------------------------------------------
-gdays = np.zeros((int(4*lead)))
-nh    = np.zeros((int(4*lead)))
-sh    = np.zeros((int(4*lead)))
+gdays = np.zeros((int(24/dh*lead)))
+nh    = np.zeros((int(24/dh*lead)))
+sh    = np.zeros((int(24/dh*lead)))
 
-gfs_readin(sys.argv[4], nh, sh)
+ufs_readin(sys.argv[4], nh, sh)
 for i in range(0, len(gdays)):
-  gdays[i] = (i+1)*0.25
+  gdays[i] = (i+1)*(dh/24)
 #  print(gdays[i], nh[i], sh[i])
 
 #------------------------------------------------------------------------
-import matplotlib
-import matplotlib.pyplot as plt
-
 matplotlib.use('Agg')
 fig,ax = plt.subplots()
 ax.plot(days, numext[daynum:int(daynum+lead+1)],label="nsidc.north")
 ax.plot(days, sumext[daynum:int(daynum+lead+1)], label="nsidc.south")
-ax.plot(gdays, nh, label="gfs_north")
-ax.plot(gdays, sh, label="gfs_south")
-ax.set(title = "GFS."+ttag.strftime("%Y%m%d") ) 
+ax.plot(gdays, nh, label="ufs_north")
+ax.plot(gdays, sh, label="ufs_south")
+#ax.set(title = "GFS."+ttag.strftime("%Y%m%d") ) 
+ax.set(title = "SFS."+ttag.strftime("%Y%m%d") ) 
 ax.legend()
 ax.grid()
 plt.savefig("overlay.png")
-

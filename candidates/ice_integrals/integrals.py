@@ -34,15 +34,13 @@ def parse_8digits(tag):
 #gaea: base   = '/ncrc/home1/Robert.Grumbine/scratch6/COMROOT/'
 #ursa: base   = '/home/Robert.Grumbine/scratch/COMROOT/'
 #Wcoss2:
-base = './'
-expt   = sys.argv[1]
-#start  = datetime.datetime(2024,7,1)
-start  = parse_8digits(sys.argv[2] )
+base = sys.argv[1]
+expt   = sys.argv[2]
+start  = parse_8digits(sys.argv[3] )
 maxmem = 0 #0 for GFS, 10 for SFS
-#maxhour = 8784 # 366 d
-#maxhour = 744  # 31 d
-maxhour = 384  # 16 d
-dh = 6 #24 for SFS
+maxhour = 8784 # 366 d -- SFS
+#maxhour = 384  # 16 d -- GFS
+dh = 24 #6 for GFS, 24 for SFS
 
 crit_conc = 0.15 #concentration defining 'extent'
 
@@ -86,11 +84,10 @@ count = 0
 for memno in range(0,maxmem+1):
 
   # SFS
-  #fbase = base + expt + '/sfs.' + start.strftime("%Y%m%d") + '/00/mem' + \
-  #             f"{memno:03d}"+'/model/ice/history/sfs.t00z.24hr_avg.f'
-  #             #f"{memno:03d}" + '/products/ice/netcdf/native/sfs.t00z.tripolar.f'
+  fbase = base + '/' + expt + '/00/mem' + \
+               f"{memno:03d}"+'/products/ice/netcdf/native/sfs.t00z.native.f'
   # GFS
-  fbase = base + expt + "/00/model/ice/history/gfs.t00z.6hr_avg.f"
+  #fbase = base + '/' + expt + "/00/model/ice/history/gfs.t00z.6hr_avg.f"
 
   for h in range(dh,maxhour+1,dh):
     fname = fbase + f"{h:03d}" + '.nc'
