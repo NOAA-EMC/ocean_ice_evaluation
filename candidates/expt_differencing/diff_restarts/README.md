@@ -26,13 +26,15 @@ Edit `config_compare_MOM_restarts.yaml` to point to your Control (CTL) and Exper
 ### 2. Execute via Shell Script
 The shell script handles the module loading and runs the comparison automatically:
 
-```bash
+```
 chmod +x make_plots.sh
 ./make_plots.sh
+```
 
 ---
 
 Usage of `compare_MOM_restartFields.py`:
+
 ```
  ./compare_MOM_restartFields.py -h
 usage: compare_MOM_restartFields.py [-h] config
