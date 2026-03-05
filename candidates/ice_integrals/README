@@ -1,12 +1,27 @@
-Integral statistics for sea ice -- area, extent, volume
+Integral statistics for sea ice -- extent, volume
 
+0) In directory with the experiments, copy (from ocean_ice_evaluation/...) get02135.sh, integrals.py, ufsfcst.py, makefigs.sh
+
+1) get02135.sh
+in the directory you're running the analysis from, execute get02135.sh 
+
+2) integrals.py -- computes integrals for NH, SH, Globe
 edit 'base' to point to the directory above the experiments
-  edit starting date 
-  then provide experiment name(s)
+edit 'maxmem' -- 0 for GFS, 10 for SFS currently
+edit 'maxhour' for the experiment, 8784 for SFS, 384 for GFSv17
+edit 'dh' for the experiment, 24 for SFS, 6 for GFS
 assumes cycle = 00
-assumes members 000-010
-sfs.20231101/00/mem000/products/ice/netcdf/native
-all hours f024 to f8784
+optional: edit the critical value. 0.15 concentration is canonical but other values may be more informative for a given experiment
+mandatory: uncomment the correct code for fbase, SFS vs. GFS
+the command is invoked by:
+       python3 integrals.py $base $expt $PDY
+  where $base is the path to the level above the sfs (or gfs) experiment's output. e.g., for /home/Robert.Grumbine/clim_data/sfsbeta/sfs.19910301 the $base argument is /home/Robert.Grumbine/clim_data/sfsbeta from arbitrary location, or ./ if you're running from the sfsbeta directory
+  expt in this example is sfs.19910301
+  PDY is the 8 digit date you're working with. 19910301 in this case
 
-needs auxiliary file with tarea for the cells
+it will compute and plot the global area, global volume, global extent, NH extent, and SH extent for the experiment. area and extents are in millions of km^2. Volume is million km^2*m
+
+3) ufsfcst.py -- takes output of integrals.py and the NSIDC ice index 
+and produce plot of nh and sh extent observed (by NSIDC) and modeled
+      python3 ufsfcst.py $yy $mm $dd int.${yy}${mm}${dd}
 
