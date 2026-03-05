@@ -29,3 +29,19 @@ The shell script handles the module loading and runs the comparison automaticall
 ```bash
 chmod +x make_plots.sh
 ./make_plots.sh
+
+---
+
+Usage of `compare_MOM_restartFields.py`:
+```
+ ./compare_MOM_restartFields.py -h
+usage: compare_MOM_restartFields.py [-h] config
+
+MOM6 Restart Comparison Tool
+
+positional arguments:
+  config      Path to the YAML configuration file
+
+options:
+  -h, --help  show this help message and exit
+```
