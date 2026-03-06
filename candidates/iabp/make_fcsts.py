@@ -31,19 +31,19 @@ class fcst_pt:
     #debug: print(fdt, flush=True)
     self.tag += fdt
 
-  def make_fcst(self, y):
+  def make_fcst(self, fy):
     ''' fcst_pt.make_fcst(y) -- give the drift distance and direction 
             from self to fcst_pt y '''
-    fdelta = (y.tag - self.tag).total_seconds()
+    fdelta = (fy.tag - self.tag).total_seconds()
     if (fdelta == 0):
         return (0, 0, 0, 0)
-    fdist      = harcdis(self.llpt, y.llpt)*1000. # harcdis is in km
-    fdirection = bearing(self.llpt, y.llpt)
+    fndist      = harcdis(self.llpt, fy.llpt)*1000. # harcdis is in km
+    fdirection = bearing(self.llpt, fy.llpt)
     #debug: print("delta = ",delta, int(delta/86400+0.5), flush=True )
-    fspeed = fdist / fdelta
-    return (fdist, fdirection, fdelta, fspeed)
+    fspeed = fndist / fdelta
+    return (fndist, fdirection, fdelta, fspeed)
 
-  def finddate(fcsts, fdate):
+  def finddate(self, fcsts, fdate):
     ''' finddate -- find the index, if it exists, of the drifter on given date ''' 
     np = len(fcsts)
     toler = 1800
@@ -115,9 +115,9 @@ def nearest(oloc, mlats, mlons, toler = 50.):
         mindist = tmp
     if (mindist < toler):
       return mi
-    else:
-      return -1
-      
+
+    return -1
+
 
 yyy = -1
 for flead in range(1, fcst_len+1):
@@ -137,7 +137,8 @@ for flead in range(1, fcst_len+1):
     fdir = fmodel.variables['Drift_Bearing'][:]
     fdist = fmodel.variables['Drift_Distance'][:]
     fdist *= 1000. # convert to meters
-    #debug: print(nbuoy, ilat.max(), ilat.min(), flat.max(), flat.min(), fdir.max(), fdist.max(), flush=True )
+    #debug: print(nbuoy, ilat.max(), ilat.min(), flat.max(), flat.min(), \
+            #fdir.max(), fdist.max(), flush=True )
 
     if (flead == 1):
       yyy = nearest(locations[obs_index], ilat, ilon)
@@ -150,27 +151,3 @@ for flead in range(1, fcst_len+1):
         print(flead, "obs ",d, wdir, 'fcst', fdist[yyy], fdir[yyy])
     else:
         print(flead, 'bad fcst ',yyy,  fdist[yyy], fdir[yyy])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
