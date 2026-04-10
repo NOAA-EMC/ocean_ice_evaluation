@@ -34,8 +34,8 @@ def nearcycle(fcycle, fincr, fnear):
 
 #-------------------------------------------------------------------------
 # Change these
-start = datetime.date(2025,1,1)
-end   = datetime.date(2026,3,4)
+start = datetime.date(2024,1,1)
+end   = datetime.date(2026,4,4)
 cycle = 0 # hours UTC
 dtlim = 60*30 # window in seconds of being 'near' cycle
 
