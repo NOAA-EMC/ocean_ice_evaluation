@@ -48,10 +48,10 @@ def ufs_readin(fname, nh, sh):
 numtag, numext = nsidc_readin("N_seaice_extent_daily_v4.0.csv")
 sumtag, sumext = nsidc_readin("S_seaice_extent_daily_v4.0.csv")
 
-#lead = 16 # GFS
-#dh = 6
-lead = 366 # SFS
-dh = 24 #SFS
+lead = 16 # GFS
+dh = 6
+#lead = 366 # SFS
+#dh = 24 #SFS
 days = np.zeros((lead+1))
 # Get the lead days observations
 ttag = datetime.datetime(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
@@ -84,8 +84,8 @@ ax.plot(days, numext[daynum:int(daynum+lead+1)],label="nsidc.north")
 ax.plot(days, sumext[daynum:int(daynum+lead+1)], label="nsidc.south")
 ax.plot(gdays, nh, label="ufs_north")
 ax.plot(gdays, sh, label="ufs_south")
-#ax.set(title = "GFS."+ttag.strftime("%Y%m%d") ) 
-ax.set(title = "SFS."+ttag.strftime("%Y%m%d") ) 
+ax.set(title = "GFS."+ttag.strftime("%Y%m%d") ) 
+#ax.set(title = "SFS."+ttag.strftime("%Y%m%d") ) 
 ax.legend()
 ax.grid()
 plt.savefig("overlay.png")

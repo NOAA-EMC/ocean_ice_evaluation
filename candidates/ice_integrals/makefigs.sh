@@ -2,11 +2,11 @@
 
 source ~/env3.12/bin/activate
 
-#stream2: 20240601-20240911
-#stream3: 20241201-20250326
-#realtime: 20251121-20260211
-tag=20240601
-while [ $tag -le 20250401 ]
+#stream2: 20240601-20241130
+#stream3: 20241201-20250531
+#realtime: 20251121-20260211, et seq.
+tag=20241201
+while [ $tag -le 20250531 ]
 do
   echo $tag
 
@@ -21,7 +21,7 @@ do
       yy=`echo $tag | cut -c1-4`
       mm=`echo $tag | cut -c5-6`
       dd=`echo $tag | cut -c7-8`
-      time python3 gfsfcst.py $yy $mm $dd int.$tag
+      time python3 ufsfcst.py $yy $mm $dd int.$tag
       mv overlay.png overlay_$tag.png
     fi
   fi
