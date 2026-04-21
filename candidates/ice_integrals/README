@@ -1,5 +1,8 @@
 Integral statistics for sea ice -- extent, volume
 
+0) Ensure you have the python modules named in reqt.txt. If not, in your python environment, execute python3 -m pip install -r reqt.txt
+Scripts are set by default to use Robert Grumbine environments, which do include the needed modules.
+
 0) In directory with the experiments, copy (from ocean_ice_evaluation/...) get02135.sh, integrals.py, ufsfcst.py, makefigs.sh
 
 1) get02135.sh
