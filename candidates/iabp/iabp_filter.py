@@ -34,8 +34,8 @@ def nearcycle(fcycle, fincr, fnear):
 
 #-------------------------------------------------------------------------
 # Change these
-start = datetime.date(2025,1,1)
-end   = datetime.date(2026,3,4)
+start = datetime.date(2024,1,1)
+end   = datetime.date(2026,4,4)
 cycle = 0 # hours UTC
 dtlim = 60*30 # window in seconds of being 'near' cycle
 
@@ -96,7 +96,8 @@ for more in fin:
   incr = (float(words[5])-1.) * dt
   obs += incr
 
-  # RG: preserve previous and only take new days' observations, vs. multiple within the 2*dtlim window
+  # RG: preserve previous and only take new days' observations, vs. 
+  #          multiple within the 2*dtlim window
   if (end >= obs >= start and nearcycle(cycle, incr, dtlim) ):
     print(words[1], words[5], lat, lon, end=" " )
     if (usebp):

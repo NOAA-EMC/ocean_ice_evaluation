@@ -98,9 +98,10 @@ dbase = '/export/emc-lw-rgrumbi/rmg3/newdrift_fcst/'+fcst_date.strftime("%Y%m%d"
 dt = datetime.timedelta(1)
 fbase = dbase + '/drift_f'
 
-#Find the model point nearest the buoy:
-#RG: might want to specify tolerance (km)
+
 def nearest(oloc, mlats, mlons, toler = 50.):
+    ''' nearest(oloc, mlats, mlons, toler = 50) -- Find the model point nearest the buoy.
+        toler is the minimum distance for a match, in km. defaults to 50 km. '''
     np = len(mlons)
     mindist = 1.e6
     tloc = latpt.latpt()
