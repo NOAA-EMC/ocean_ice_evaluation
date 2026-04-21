@@ -1,12 +1,17 @@
 #!/bin/sh
 
-source ~/env3.12/bin/activate
+#ursa:
+source ~/rg/env3.13/bin/activate
+#wcoss: source ~/env3.12/bin/activate
+
+# Get the NSIDC extent files for reference
+./get02135.sh
 
 #stream2: 20240601-20241130
 #stream3: 20241201-20250531
 #realtime: 20251121-20260211, et seq.
-tag=20241201
-while [ $tag -le 20250531 ]
+tag=20250601
+while [ $tag -le 20260409 ]
 do
   echo $tag
 
