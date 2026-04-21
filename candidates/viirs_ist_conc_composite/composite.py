@@ -18,9 +18,11 @@ import netCDF4 as nc
 from grid import *
 
 #---------------------------------------------------------------------------
-def qcfilt(conc, concvar, temp, tempvar, lat, count):
-    scale = count/cos(lat*3.1416/180.)
-    return not (temp < 268.545 and scale > 125.005)
+def qcfilt(fconc, fconcvar, ftemp, ftempvar, flat, fcount):
+    ''' qcfilt(conc, concvar, temp, tempvar, lat, count) -- qcfilter for viirs. 
+        Return false if the values are not 'good' '''
+    scale = fcount/cos(flat*3.14159/180.)
+    return not (ftemp < 268.545 and scale > 125.005)
 
 
 #---------------------------------------------------------------------------
@@ -217,6 +219,7 @@ class ncout:
       self.count += 1
 
     def encodevar(self, allvalues, vname):
+      ''' encodevar(allvalues, vname) -- insert values in to the ncfile for variable vname '''
       if (self.nx*self.ny != 0) :
         self.ncfile.variables[vname][:,:] = allvalues[:,:]
 

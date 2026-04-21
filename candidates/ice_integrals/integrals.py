@@ -25,8 +25,8 @@ import matplotlib.pyplot as plt
 #---------------------------------------------------------------------
 def parse_8digits(tag):
   """ Convert an 8 digit int to a datetime.date object """
-  tmp = int(tag)
-  (yy,mm,dd) = (int(int(tmp)/10000),int((int(tmp)%10000)/100),int(tmp)%100)
+  ftmp = int(tag)
+  (yy,mm,dd) = (int(int(ftmp)/10000),int((int(ftmp)%10000)/100),int(ftmp)%100)
   tag_out = datetime.datetime(int(yy), int(mm), int(dd))
   return tag_out
 

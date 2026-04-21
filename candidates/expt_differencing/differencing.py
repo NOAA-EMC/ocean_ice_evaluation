@@ -11,10 +11,8 @@ Robert Grumbine 1/6/2026
 import os
 import sys
 from math import sqrt
-import copy
 
 import numpy as np
-import netCDF4 as nc
 
 #-------------------------------------------------------------------
 expt1  = sys.argv[1]
