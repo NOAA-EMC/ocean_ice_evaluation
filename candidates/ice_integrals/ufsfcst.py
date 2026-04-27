@@ -1,4 +1,5 @@
 '''
+Plot the NSIDC extents against the UFS modelled extents
 '''
 
 import sys
@@ -11,47 +12,48 @@ import matplotlib.pyplot as plt
 
 #------------------------------------------------------------------------
 def nsidc_readin(fname):
+  ''' nsidc_readin(fname) -- read in the nsidc extent file '''
   ext = []
   missing = []
   tag = []
   with open(fname,"r",encoding="utf-8") as fnorth:
     line = fnorth.readline()
     line = fnorth.readline()
-    k = 0
     for line in fnorth:
       words=line.split(',')
       yy = int(words[0])
       mm = int(words[1])
       dd = int(words[2])
-      ttag = datetime.datetime(yy,mm,dd)
+      fttag = datetime.datetime(yy,mm,dd)
       ext.append(float(words[3]))
       missing.append(float(words[4]))
-      tag.append(ttag)
-      k += 1
+      tag.append(fttag)
 
   fnumtag = np.array(tag)
   fnumext = np.array(ext)
   del ext, missing, tag
   return fnumtag, fnumext
 
-def ufs_readin(fname, nh, sh):
+def ufs_readin(fname, fnh, fsh):
+  ''' ufs_readin(fname, nh, sh) -- read in the ufs northern and southern hemisphere 
+        ice extents from file fname. Open the file here '''
   with open(fname, "r", encoding="utf-8") as fufs:
-    k = 0
+    fk = 0
     for line in fufs:
       words = line.split()
-      nh[k] = float(words[5])
-      sh[k] = float(words[6])
-      k += 1
+      fnh[fk] = float(words[5])
+      fsh[fk] = float(words[6])
+      fk += 1
 
 #------------------------------------------------------------------------
 
 numtag, numext = nsidc_readin("N_seaice_extent_daily_v4.0.csv")
 sumtag, sumext = nsidc_readin("S_seaice_extent_daily_v4.0.csv")
 
-#lead = 16 # GFS
-#dh = 6
-lead = 366 # SFS
-dh = 24 #SFS
+lead = 16 # GFS
+dh = 6
+#lead = 366 # SFS
+#dh = 24 #SFS
 days = np.zeros((lead+1))
 # Get the lead days observations
 ttag = datetime.datetime(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
@@ -84,8 +86,8 @@ ax.plot(days, numext[daynum:int(daynum+lead+1)],label="nsidc.north")
 ax.plot(days, sumext[daynum:int(daynum+lead+1)], label="nsidc.south")
 ax.plot(gdays, nh, label="ufs_north")
 ax.plot(gdays, sh, label="ufs_south")
-#ax.set(title = "GFS."+ttag.strftime("%Y%m%d") ) 
-ax.set(title = "SFS."+ttag.strftime("%Y%m%d") ) 
+ax.set(title = "GFS."+ttag.strftime("%Y%m%d") )
+#ax.set(title = "SFS."+ttag.strftime("%Y%m%d") )
 ax.legend()
 ax.grid()
 plt.savefig("overlay.png")

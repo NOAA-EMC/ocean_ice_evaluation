@@ -25,8 +25,8 @@ import matplotlib.pyplot as plt
 #---------------------------------------------------------------------
 def parse_8digits(tag):
   """ Convert an 8 digit int to a datetime.date object """
-  tmp = int(tag)
-  (yy,mm,dd) = (int(int(tmp)/10000),int((int(tmp)%10000)/100),int(tmp)%100)
+  ftmp = int(tag)
+  (yy,mm,dd) = (int(int(ftmp)/10000),int((int(ftmp)%10000)/100),int(ftmp)%100)
   tag_out = datetime.datetime(int(yy), int(mm), int(dd))
   return tag_out
 
@@ -34,13 +34,16 @@ def parse_8digits(tag):
 #gaea: base   = '/ncrc/home1/Robert.Grumbine/scratch6/COMROOT/'
 #ursa: base   = '/home/Robert.Grumbine/scratch/COMROOT/'
 #Wcoss2:
-base = sys.argv[1]
-expt   = sys.argv[2]
-start  = parse_8digits(sys.argv[3] )
+base = sys.argv[0]
+expt   = sys.argv[1]
+start  = parse_8digits(sys.argv[2] )
+#print(base, expt, start)
+#exit(0)
+
 maxmem = 0 #0 for GFS, 10 for SFS
-maxhour = 8784 # 366 d -- SFS
-#maxhour = 384  # 16 d -- GFS
-dh = 24 #6 for GFS, 24 for SFS
+#maxhour = 8784 # 366 d -- SFS
+maxhour = 384  # 16 d -- GFS
+dh = 6 #6 for GFS, 24 for SFS
 
 crit_conc = 0.15 #concentration defining 'extent'
 
@@ -84,10 +87,10 @@ count = 0
 for memno in range(0,maxmem+1):
 
   # SFS
-  fbase = base + '/' + expt + '/00/mem' + \
-               f"{memno:03d}"+'/products/ice/netcdf/native/sfs.t00z.native.f'
+  #fbase = base + '/' + expt + '/00/mem' + \
+  #             f"{memno:03d}"+'/products/ice/netcdf/native/sfs.t00z.native.f'
   # GFS
-  #fbase = base + '/' + expt + "/00/model/ice/history/gfs.t00z.6hr_avg.f"
+  fbase =  './' + expt + "/00/model/ice/history/gfs.t00z.6hr_avg.f"
 
   for h in range(dh,maxhour+1,dh):
     fname = fbase + f"{h:03d}" + '.nc'
