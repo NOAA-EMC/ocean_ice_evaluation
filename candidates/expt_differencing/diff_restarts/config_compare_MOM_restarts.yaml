@@ -1,0 +1,27 @@
+# Configuration
+paths:
+  control: "/scratch3/NCEPDEV/climate/Jiande.Wang/working/scratch/V17-check/RESTART-spinup/stream2/gdas.20240515/18/model/ocean/restart/"
+  experiment: "/scratch3/NCEPDEV/climate/Jiande.Wang/working/scratch/V17-check/RESTART-spinup/stream4/gdas.20250515/18/model/ocean/restart/"
+  output: "/scratch4/NCEPDEV/marine/Santha.Akella/Figs/"
+  file_pattern: "*MOM.res.nc"
+
+metadata:
+  labels: ["stream2", "stream4"]
+
+processing:
+# to plot each and every layer, set layer_stride = 1, to plot every tenth, set to 10.
+  layer_stride: 10
+  fig_dpi: 80
+
+# Variable-specific plot settings
+variables:
+  Temp:
+    min: -2.0
+    max: 30.0
+    cmap: "Spectral_r"
+    diff_lim: 2.0
+  Salt:
+    min: 32.0
+    max: 37.0
+    cmap: "viridis"
+    diff_lim: 0.5
