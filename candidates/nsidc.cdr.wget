@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-# Mirror NSIDC CDR V5
+# Mirror NSIDC CDR V6
 # Robert Grumbine 1/6/2026
 
 export OUTBASE=your_path_here
@@ -11,5 +11,5 @@ cd $OUTBASE
 
 base=ftp://sidads.colorado.edu/pub/DATASETS/
 
-wget -nv --mirror $base/NOAA/G02202_V5/
+wget -nv --mirror $base/NOAA/G02202_V6/
 
